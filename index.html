@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ТАНУКИ — официантка против всех</title>
+<meta name="description" content="TANUKI — бесплатная игра для Windows: официантка Кристина против роллов-конкурентов, живого соуса и Шефа. Четыре этажа, боссы, 9 образов, 4 концовки.">
+<meta property="og:title" content="TANUKI">
+<meta property="og:description" content="Суши. Смена. Драка. Бесплатная игра для Windows.">
+<meta property="og:image" content="img/poster.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.png">
+<style>
+@font-face { font-family: "Brush"; src: url("fonts/brush_ruslan_display.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Marker"; src: url("fonts/marker_caveat_bold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Golos"; src: url("fonts/golos_text_v17.ttf") format("truetype"); font-display: swap; }
+:root {
+  --ink: #1b1215; --wood: #2a1a16; --wood2: #3a241d; --paper: #f4ead4; --paper2: #e9dcc0;
+  --gold: #e8b64c; --gold2: #b5832c; --burgundy: #7a1f2b; --brick: #b2412f; --rice: #fbf6ea; --mint: #8fd1b0;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--wood); color: var(--rice); font-family: "Golos", system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 2px, transparent 2px 160px),
+              linear-gradient(180deg, #2f1d18, #1d1210); }
+a { color: var(--gold); }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+nav { position: sticky; top: 0; z-index: 10; background: rgba(23,14,12,.92); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(232,182,76,.25); }
+nav .wrap { display: flex; align-items: center; gap: 22px; height: 58px; }
+nav .logo { font-family: "Brush"; font-size: 26px; color: var(--gold); text-decoration: none; letter-spacing: 1px; }
+nav .links { display: flex; gap: 18px; margin-left: auto; align-items: center; }
+nav .links a { color: var(--rice); text-decoration: none; font-size: 15px; opacity: .85; }
+nav .links a:hover { opacity: 1; color: var(--gold); }
+.lang { border: 1px solid var(--gold2); background: transparent; color: var(--gold); border-radius: 6px; padding: 4px 10px; font: inherit; font-size: 14px; cursor: pointer; }
+.hero { position: relative; overflow: hidden; padding: 64px 0 56px; }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 36px; align-items: center; }
+.hero h1 { font-family: "Brush"; font-weight: normal; font-size: clamp(64px, 11vw, 132px); line-height: .95; margin: 0; color: var(--gold);
+  text-shadow: 0 5px 0 var(--ink), 0 8px 24px rgba(0,0,0,.5); letter-spacing: 2px; }
+.hero .tag { font-family: "Marker"; font-size: clamp(26px, 3.4vw, 38px); color: var(--paper); margin: 10px 0 18px; }
+.hero p.lead { font-size: 19px; max-width: 34em; opacity: .92; }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Brush"; font-size: 24px; letter-spacing: 1px;
+  padding: 14px 26px; border-radius: 10px; border: 3px solid var(--gold); background: var(--burgundy); color: var(--rice);
+  box-shadow: 0 6px 0 var(--ink), 0 10px 22px rgba(0,0,0,.4); transition: transform .12s, box-shadow .12s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink), 0 14px 26px rgba(0,0,0,.45); }
+.btn.ghost { background: transparent; border-color: var(--paper2); color: var(--paper); font-size: 20px; padding: 11px 20px; }
+.meta { font-size: 14px; opacity: .7; margin-top: 10px; }
+.keyart { position: relative; }
+.keyart .polaroid { background: var(--rice); padding: 14px 14px 52px; border-radius: 4px; transform: rotate(2.2deg);
+  box-shadow: 0 18px 40px rgba(0,0,0,.55); max-width: 470px; margin-left: auto; }
+.keyart .polaroid img { width: 100%; display: block; border-radius: 2px; background: #cdb79a; }
+.keyart .polaroid span { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: "Marker"; font-size: 26px; color: var(--ink); }
+.pin { position: absolute; top: -10px; left: 50%; width: 22px; height: 22px; border-radius: 50%; background: var(--brick); box-shadow: 0 3px 0 #5a1a12; }
+section { padding: 56px 0; }
+h2 { font-family: "Brush"; font-weight: normal; font-size: clamp(36px, 5vw, 54px); color: var(--gold); margin: 0 0 22px; letter-spacing: 1px; text-shadow: 0 4px 0 var(--ink); }
+.video { position: relative; border-radius: 12px; overflow: hidden; border: 3px solid var(--gold2); box-shadow: 0 18px 44px rgba(0,0,0,.5); background: #000; aspect-ratio: 16/9; }
+.video video { width: 100%; height: 100%; display: block; }
+.paper { background: var(--paper); color: var(--ink); border-radius: 6px; padding: 30px 32px; box-shadow: 0 16px 34px rgba(0,0,0,.45);
+  background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px); background-size: 7px 7px; }
+.paper h3 { font-family: "Brush"; font-weight: normal; font-size: 24px; margin: 0 0 6px; color: var(--burgundy); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.feature { background: var(--paper); color: var(--ink); border-radius: 6px; padding: 20px 22px 22px; box-shadow: 0 10px 24px rgba(0,0,0,.4); position: relative; }
+.feature:nth-child(3n+1) { transform: rotate(-.6deg); } .feature:nth-child(3n+2) { transform: rotate(.5deg); }
+.feature h3 { font-family: "Brush"; font-weight: normal; font-size: 22px; margin: 0 0 6px; color: var(--burgundy); padding-right: 40px; }
+.feature p { margin: 0; font-size: 15.5px; }
+.feature .n { position: absolute; top: 12px; right: 16px; font-family: "Marker"; font-size: 30px; color: var(--brick); opacity: .8; }
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.shots a { display: block; border-radius: 6px; overflow: hidden; border: 2px solid rgba(232,182,76,.35); box-shadow: 0 8px 20px rgba(0,0,0,.4); }
+.shots img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; transition: transform .25s; }
+.shots a:hover img { transform: scale(1.04); }
+.outfits img { width: 100%; border-radius: 8px; display: block; background: #8a7e70; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+ol, ul { padding-left: 1.2em; margin: 8px 0 0; }
+li { margin: 4px 0; }
+kbd { font-family: "Golos"; font-size: 13px; border: 1px solid #8a7356; border-bottom-width: 3px; border-radius: 5px; padding: 1px 6px; background: #fff8e8; color: var(--ink); }
+table.keys { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+table.keys td { padding: 5px 6px; border-bottom: 1px dashed rgba(0,0,0,.15); vertical-align: top; }
+.smart { border-left: 5px solid var(--brick); background: #fff4e0; padding: 12px 16px; border-radius: 4px; margin-top: 14px; font-size: 15.5px; }
+footer { padding: 40px 0 60px; font-size: 14px; opacity: .78; border-top: 1px solid rgba(232,182,76,.2); }
+footer .wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.lightbox { position: fixed; inset: 0; background: rgba(10,6,6,.92); display: none; align-items: center; justify-content: center; z-index: 50; padding: 20px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.lightbox.on { display: flex; }
+[data-lang="en"] .ru, [data-lang="ru"] .en { display: none !important; }
+@media (max-width: 900px) {
+  .hero .wrap, .two, footer .wrap { grid-template-columns: 1fr; }
+  .grid, .shots { grid-template-columns: 1fr 1fr; }
+  .keyart .polaroid { margin: 10px auto 0; max-width: 360px; }
+  nav .links a.opt { display: none; }
+}
+@media (max-width: 560px) { .grid, .shots { grid-template-columns: 1fr; } .paper { padding: 22px 18px; } }
+</style>
+</head>
+<body data-lang="ru" data-repo="matekill21-debug/TANUKI-game">
+<nav><div class="wrap">
+  <a class="logo" href="#top">TANUKI</a>
+  <div class="links">
+    <a class="opt" href="#trailer"><span class="ru">Трейлер</span><span class="en">Trailer</span></a>
+    <a class="opt" href="#features"><span class="ru">Об игре</span><span class="en">About</span></a>
+    <a class="opt" href="#shots"><span class="ru">Скриншоты</span><span class="en">Screenshots</span></a>
+    <a class="opt" href="#install"><span class="ru">Как запустить</span><span class="en">How to run</span></a>
+    <button class="lang" id="lang" type="button">EN</button>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div>
+    <h1>TANUKI</h1>
+    <div class="tag"><span class="ru">Суши. Смена. Драка.</span><span class="en">Sushi. Shift. Brawl.</span></div>
+    <p class="lead ru">Кристина — официантка суши-ресторана «ТАНУКИ». Обычная смена превращается в драку: роллы-конкуренты, креветки-воры, живой соус и Шеф, который орёт. Принимай заказы, носи блюда, отбивайся подносом — и дойди до кабинета на четвёртом этаже.</p>
+    <p class="lead en">Kristina waits tables at the TANUKI sushi restaurant. An ordinary shift turns into a brawl: rival rolls, thieving shrimp, living sauce and a Chef who yells. Take orders, carry dishes, fight back with your tray — and make it to the office on the fourth floor.</p>
+    <div class="cta">
+      <a class="btn" id="dl" href="#"><span class="ru">Скачать бесплатно</span><span class="en">Download free</span></a>
+      <a class="btn ghost" href="#trailer"><span class="ru">▶ Трейлер</span><span class="en">▶ Trailer</span></a>
+    </div>
+    <div class="meta"><span class="ru">Windows 10/11 · 64-бит · ~290 МБ · русский и английский · версия 1.8.0</span><span class="en">Windows 10/11 · 64-bit · ~290 MB · Russian and English · version 1.8.0</span></div>
+  </div>
+  <div class="keyart"><div class="polaroid"><div class="pin"></div><img src="img/keyart.png" alt="Кристина"><span class="ru">Кристина, официантка</span><span class="en">Kristina, waitress</span></div></div>
+</div></header>
+
+<section id="trailer"><div class="wrap">
+  <h2><span class="ru">Трейлер</span><span class="en">Trailer</span></h2>
+  <div class="video"><video src="video/trailer.mp4" poster="img/poster.jpg" controls preload="none" playsinline></video></div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2><span class="ru">Что внутри</span><span class="en">What's inside</span></h2>
+  <div class="grid">
+    <div class="feature"><span class="n">4</span><h3><span class="ru">Этажа</span><span class="en">Floors</span></h3><p class="ru">Зал, кухня, подвал и кабинет — у каждого свои враги, музыка и комнаты за дверями.</p><p class="en">Hall, kitchen, basement and office — each with its own enemies, music and rooms behind doors.</p></div>
+    <div class="feature"><span class="n">!</span><h3><span class="ru">Боссы</span><span class="en">Bosses</span></h3><p class="ru">Шеф с ножами и сковородой, Надя с абсурдными поручениями, ревизия Анастасии — и Тёмная Кристина.</p><p class="en">Chef with knives and a frying pan, Nadya's absurd errands, Anastasia's audit — and Dark Kristina.</p></div>
+    <div class="feature"><span class="n">+</span><h3><span class="ru">Предметы и сочетания</span><span class="en">Items and synergies</span></h3><p class="ru">Стальной поднос, острый соус, третья рука… Два предмета — один новый эффект.</p><p class="en">A steel tray, hot sauce, a third hand… Two items — one new effect.</p></div>
+    <div class="feature"><span class="n">9</span><h3><span class="ru">Образов</span><span class="en">Outfits</span></h3><p class="ru">Кимоно, пожарная, медсестра, ночная смена, ретро и другие — за испытания и стикеры.</p><p class="en">Kimono, firefighter, nurse, night shift, retro and more — for challenges and stickers.</p></div>
+    <div class="feature"><span class="n">4</span><h3><span class="ru">Концовки</span><span class="en">Endings</span></h3><p class="ru">Твои решения и доверие коллег решают, чем кончится смена. Комиксы между этажами.</p><p class="en">Your choices and your coworkers' trust decide how the shift ends. Comics between floors.</p></div>
+    <div class="feature"><span class="n">40</span><h3><span class="ru">Стикеров и режимы</span><span class="en">Stickers and modes</span></h3><p class="ru">Бесконечная смена, смена дня с общим сидом и восемь испытаний.</p><p class="en">Endless shift, a daily shift with a shared seed and eight challenges.</p></div>
+  </div>
+</div></section>
+
+<section id="shots"><div class="wrap">
+  <h2><span class="ru">Скриншоты</span><span class="en">Screenshots</span></h2>
+  <div class="shots">
+    <a href="img/01_hall_rush.jpg"><img loading="lazy" src="img/01_hall_rush.jpg" alt=""></a>
+    <a href="img/02_boss_chef.jpg"><img loading="lazy" src="img/02_boss_chef.jpg" alt=""></a>
+    <a href="img/03_boss_kitchen.jpg"><img loading="lazy" src="img/03_boss_kitchen.jpg" alt=""></a>
+    <a href="img/04_basement.jpg"><img loading="lazy" src="img/04_basement.jpg" alt=""></a>
+    <a href="img/06_boss_office.jpg"><img loading="lazy" src="img/06_boss_office.jpg" alt=""></a>
+    <a href="img/00_menu.jpg"><img loading="lazy" src="img/00_menu.jpg" alt=""></a>
+    <a href="img/07_gallery.jpg"><img loading="lazy" src="img/07_gallery.jpg" alt=""></a>
+    <a href="img/08_comic.jpg"><img loading="lazy" src="img/08_comic.jpg" alt=""></a>
+    <a href="img/05_office.jpg"><img loading="lazy" src="img/05_office.jpg" alt=""></a>
+  </div>
+  <div class="outfits" style="margin-top:22px"><img loading="lazy" src="img/outfits.png" alt=""></div>
+</div></section>
+
+<section id="install"><div class="wrap two">
+  <div class="paper">
+    <h3><span class="ru">Как запустить</span><span class="en">How to run</span></h3>
+    <ol class="ru">
+      <li>Скачайте <b>TANUKI.zip</b> и распакуйте («Извлечь всё»).</li>
+      <li>Откройте <b>TANUKI.exe</b>. Установка не нужна.</li>
+    </ol>
+    <ol class="en">
+      <li>Download <b>TANUKI.zip</b> and unzip it ("Extract all").</li>
+      <li>Open <b>TANUKI.exe</b>. No install needed.</li>
+    </ol>
+    <div class="smart ru">Если появится синее окно <b>«Система Windows защитила ваш компьютер»</b>: нажмите <b>«Подробнее»</b>, затем <b>«Выполнить в любом случае»</b>. Так Windows встречает любую игру без платной цифровой подписи.</div>
+    <div class="smart en">If a blue <b>"Windows protected your PC"</b> window appears: click <b>"More info"</b>, then <b>"Run anyway"</b>. Windows does this for any game without a paid code-signing certificate.</div>
+    <h3 style="margin-top:22px"><span class="ru">Системные требования</span><span class="en">System requirements</span></h3>
+    <ul class="ru"><li>Windows 10 или 11, 64-бит</li><li>Процессор: 4 ядра от 2,5 ГГц</li><li>Видеокарта с OpenGL 3.3 (GTX 750 / RX 460 или новее)</li><li>Память 4 ГБ, место 400 МБ</li></ul>
+    <ul class="en"><li>Windows 10 or 11, 64-bit</li><li>CPU: 4 cores, 2.5 GHz or better</li><li>GPU with OpenGL 3.3 (GTX 750 / RX 460 or newer)</li><li>4 GB RAM, 400 MB of disk space</li></ul>
+  </div>
+  <div class="paper">
+    <h3><span class="ru">Управление</span><span class="en">Controls</span></h3>
+    <table class="keys">
+      <tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td><td><span class="ru">шаг</span><span class="en">move</span></td></tr>
+      <tr><td><kbd>E</kbd></td><td><span class="ru">принять заказ / взять / подать</span><span class="en">take order / grab / serve</span></td></tr>
+      <tr><td><span class="ru">ЛКМ</span><span class="en">LMB</span></td><td><span class="ru">удар подносом</span><span class="en">tray smack</span></td></tr>
+      <tr><td><span class="ru">ПКМ</span><span class="en">RMB</span></td><td><span class="ru">метнуть тарелку</span><span class="en">throw a plate</span></td></tr>
+      <tr><td><kbd>Shift</kbd></td><td><span class="ru">щит / отбить</span><span class="en">shield / parry</span></td></tr>
+      <tr><td><kbd>Space</kbd></td><td><span class="ru">рывок</span><span class="en">dash</span></td></tr>
+      <tr><td><kbd>Q</kbd></td><td><span class="ru">напарник</span><span class="en">partner</span></td></tr>
+      <tr><td><kbd>Esc</kbd> · <kbd>F11</kbd></td><td><span class="ru">пауза · полный экран</span><span class="en">pause · fullscreen</span></td></tr>
+    </table>
+    <p class="ru" style="margin:12px 0 0;font-size:15px">Геймпад поддерживается. Клавиши переназначаются в настройках. Есть режим для дальтоников, крупный интерфейс и темп игры 70–100%.</p>
+    <p class="en" style="margin:12px 0 0;font-size:15px">Gamepads are supported. Keys can be rebound in Settings. There's a colorblind mode, a large UI and a 70–100% game speed.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>
+    <div class="ru">Сделано для Мэйта и всей смены TANUKI. Песня «Официантка» — Папин Олимпос, используется с разрешения авторов. Музыка CC0 (OpenGameArt): Julie Damsgaard / Spring Spring, MintoDog, Juhani Junkala / SubspaceAudio, Karate Studios, Pro Sensory, josepharaoh99, LushoGames, Zane Little Music, HydroGene, qubodup и yd, Bobjt, Joth. Звуки — Kenney (CC0). Движок — Godot Engine (MIT). Шрифты — SIL Open Font License.</div>
+    <div class="en">Made for Mate and the whole TANUKI crew. The song "Oficiantka" (Waitress) — Papin Olimpos, used with the authors' permission. CC0 music (OpenGameArt): Julie Damsgaard / Spring Spring, MintoDog, Juhani Junkala / SubspaceAudio, Karate Studios, Pro Sensory, josepharaoh99, LushoGames, Zane Little Music, HydroGene, qubodup and yd, Bobjt, Joth. Sounds — Kenney (CC0). Engine — Godot Engine (MIT). Fonts — SIL Open Font License.</div>
+  </div>
+  <div style="text-align:right"><a id="repo" href="#">GitHub</a> · <a id="rel" href="#"><span class="ru">Все версии</span><span class="en">All releases</span></a></div>
+</div></footer>
+
+<div class="lightbox" id="lb"><img alt=""></div>
+<script>
+(function () {
+  var body = document.body, repo = body.getAttribute("data-repo");
+  var base = "https://github.com/" + repo;
+  document.getElementById("dl").href = base + "/releases/latest/download/TANUKI.zip";
+  document.getElementById("repo").href = base;
+  document.getElementById("rel").href = base + "/releases";
+  var btn = document.getElementById("lang");
+  function setLang(l) {
+    body.setAttribute("data-lang", l); document.documentElement.lang = l; btn.textContent = l === "ru" ? "EN" : "RU";
+    document.title = l === "ru" ? "ТАНУКИ — официантка против всех" : "TANUKI — a waitress against everyone";
+    try { localStorage.setItem("tanuki-lang", l); } catch (e) {}
+  }
+  var saved = null; try { saved = localStorage.getItem("tanuki-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "ru").toLowerCase().indexOf("ru") === 0 ? "ru" : "en"));
+  btn.addEventListener("click", function () { setLang(body.getAttribute("data-lang") === "ru" ? "en" : "ru"); });
+  var lb = document.getElementById("lb"), lbi = lb.querySelector("img");
+  document.querySelectorAll(".shots a").forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); lbi.src = a.href; lb.classList.add("on"); });
+  });
+  lb.addEventListener("click", function () { lb.classList.remove("on"); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") lb.classList.remove("on"); });
+})();
+</script>
+</body>
+</html>
